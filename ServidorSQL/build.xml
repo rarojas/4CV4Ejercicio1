@@ -1,0 +1,23 @@
+<project name="Servidor" default="dist" basedir=".">
+    <description>
+    </description>
+
+  <property name="src" location="src"/>
+  <property name="build" location="build"/>
+  <property name="dist"  location="dist"/>
+
+  <target name="compile">
+      <mkdir dir="build" />
+      <javac srcdir="src" destdir="build" />
+  </target>
+  <target name="dist" depends="compile"   description="generate the distribution" >
+    <mkdir dir="${dist}"/>
+    <jar jarfile="${dist}/Servidor.jar" basedir="${build}">
+        <zipgroupfileset dir="lib" includes="mysql-connector-java-5.1.18.jar"/>
+        <manifest>
+          <attribute name="DependencyFinder" value="main"/>
+          <attribute name="Main-Class" value="com.escom.servidor.sql.Servidor"/>
+        </manifest>
+      </jar>
+  </target>
+</project>
